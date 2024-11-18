@@ -65,9 +65,15 @@ public class ScoresL
         }
         return -1;
     }
-//    public int binarySearch(double target) {
-//	// TO DO
-//}
+    public int binarySearch(double target) {
+        int l=0,r=theData.size()-1;if(l>r)return -1;
+        while(l<r){
+            int mid=(l+r)/2+1;
+            if(theData.get(mid)>target+0.001)r=mid-1;
+            else l=mid;
+        }
+        return Math.abs(theData.get(l)-target)<0.001?l:-1;
+    }
     // 顺序查找第一个不小于目标的数
     public int findLE(double target) {
         for (int i = 0; i < theData.size(); i++) {
@@ -77,9 +83,15 @@ public class ScoresL
         return -1;
     }
    // 二分查找第一个不小于目标的数
-//    public int binarySearchLE(double target) {
-//        // TO DO	
-//    }
+    public int binarySearchLE(double target) {
+        int l=0,r=theData.size()-1;if(l>r)return -1;
+        while(l<r){
+            int mid=(l+r)/2;
+            if(theData.get(mid)<target)l=mid+1;
+            else r=mid;
+        }
+        return theData.get(l)>=target?l:-1;
+    }
    
     // 顺序查找第一个不大于目标的数
     public int findGE(double target) {
@@ -90,9 +102,15 @@ public class ScoresL
         return -1;
     }
     // 二分查找第一个不大于目标的数
-//    public int binarySearchGE(double target) {
-//    	// TO DO
-//    }
+    public int binarySearchGE(double target) {
+        int l=0,r=theData.size()-1;if(l>r)return -1;
+        while(l<r){
+            int mid=(l+r)/2+1;
+            if(theData.get(mid)>target)r=mid-1;
+            else l=mid;
+        }
+        return theData.get(l)<=target?l:-1;
+    }
     
 
   
@@ -143,11 +161,26 @@ public class ScoresL
         System.out.print("===   SortData  ===: \n");
         Collections.sort(theData);
     }
-    
-//    public void sort2()
-//    {
-//    	TO DO
-//    }
+    private void mergeSort(int l,int r){
+        if(l>=r)return;
+        int mid=(l+r)>>1,lp=l,rp=mid+1;
+        mergeSort(l,mid);mergeSort(mid+1,r);
+        ArrayList<Double> tmp=new ArrayList<Double>();
+        while(lp<=mid||rp<=r){
+            if(rp==r+1||(lp<=mid&&theData.get(lp)<theData.get(rp))){
+                tmp.add(theData.get(lp));++lp;
+            }
+            else{
+                tmp.add(theData.get(rp));++rp;
+            }
+        }
+        for(int i=0;i<tmp.size();++i)theData.set(l+i,tmp.get(i));
+    }
+    public void sort2()
+    {
+        System.out.print("===   SortData  ===: \n");
+        mergeSort(0,theData.size()-1);
+    }
     
     
 }
