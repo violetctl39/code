@@ -1,5 +1,3 @@
-package ex;
-
 /* CMPINF 0401 Summer 2024 Java Example 12b
 Compare to ex12a
 

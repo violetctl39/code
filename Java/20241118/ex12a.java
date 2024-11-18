@@ -1,5 +1,3 @@
-package ex;
-
 /* CMPINF 0401 Summer 2024 Java Example 12a
 This example demonstrates direct and sequential access of Java arrays of primitive
 types. It also demonstrates SEQUENTIAL SEARCH, a simple algorithm for finding

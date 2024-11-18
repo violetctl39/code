@@ -1,5 +1,3 @@
-package ex;
-
 //CMPINF 0401 Summer 2024
 //Class to store and manipulate scores (use with ex12b.java).  This handout
 //also demonstrates sharing of arrays across objects and resizing arrays.
