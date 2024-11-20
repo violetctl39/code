@@ -20,21 +20,21 @@ string s;
 
 
 int main(){
-    T=read();
+    cin>>T;
     while(T--){
-        n=read();s.clear();
+        cin>>n;s.clear();
         for(int i=n;i>=2;--i){
             cout<<"? "<<1<<" "<<i<<endl;
-            cout.flush();
             cin>>f[i];
         }ans=f[n];
         if(!ans){puts("! IMPOSSIBLE");continue;}
         if(n==2){puts("! 01");continue;}
-        cout<<"? "<<2<<" "<<n<<endl;cout.flush();
-        cin>>f[0];if(f[0]!=f[n])s.append("0");else s.append("1");
-        for(int i=n;i>=2;--i)
-            if(f[i]!=f[i-1])s.append("1"); else s.append("0");
-        cout<<"! "<<s<<endl;
+        int p=1;
+        while(!f[p]&&!f[p+1])++p;
+        for(int i=1;i<=p-f[p+1];++i)s.append("1");
+        for(int i=1;i<=f[p+1];++i)s.append("0");
+        for(int i=p+1;i<=n;++i)if(f[i]>f[i-1])s.append("1"); else s.append("0");
+        cout<<"! "<<s<<"\n";
         
     }
 
