@@ -1,4 +1,3 @@
-package testPro;
 // CS 0401 Summer 2024
 // Demonstration of a simple array list and a simple linked list.  Note
 // that both classes have the same functionality.  However, each implementation

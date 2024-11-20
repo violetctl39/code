@@ -1,4 +1,3 @@
-package testPro;
 // CMPINF 0401 Summer 2024
 // Simple primitive Linked List class of String.  See also SimpleAList.java
 // We will see later how to make this class generic so that it can be a list

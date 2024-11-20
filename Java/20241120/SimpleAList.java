@@ -1,4 +1,3 @@
-package testPro;
 // CS 0401 Summer 2024
 // Simple primitive array list class of String.  See also SimpleLList.java.
 // We will see later how to make this class generic so that it can be a list
@@ -122,4 +121,3 @@ public class SimpleAList
 		}
 	}
 }
-
