@@ -28,11 +28,18 @@ signed main(){
     for(int i=1;i<=m;++i){
         if(a[i].q<a[i-1].q)flag=true;
         if(flag&&a[i].q>a[i-1].q){puts("I love Yuhan");return 0;}
-    }
-    if(!flag){ans=(t-1-a[m].p)+a[m].q;write(ans),pc('\n');return 0;}
-    flag=false;
+    }   
     for(int i=1;i<=m;++i)
         if(a[i].p-a[i-1].p<abs(a[i-1].q-a[i].q)){puts("I love Yuhan");return 0;}
+    if(!flag){
+        ans=(t-1-a[m].p)+a[m].q;
+        for(int i=m;i;--i){
+            if(a[i-1].q<a[i].q)break;
+            ans=max(ans,(a[i].p-a[i-1].p)/2+a[i].q);
+        }write(ans),pc('\n');
+        return 0;
+    }
+    flag=false;
     for(int i=1;i<=m;++i){
         if(a[i].q<a[i-1].q){
             int d=a[i].p-a[i-1].p,c=a[i-1].q-a[i].q;
