@@ -217,6 +217,8 @@ public class SimpleLList {
             System.out.println("Invalid operation!");
             return;
         }
+        loc1--;
+        loc2--;
         String loc1Data = get(loc1), loc2Data = get(loc2);
         set(loc1, loc2Data);
         set(loc2, loc1Data);
@@ -230,9 +232,17 @@ public class SimpleLList {
             nxt.next = curr;
             curr = nxt;
             nxt = nxtNext;
-            nxtNext = nxt.next;
+            nxtNext = nxt != null ? nxt.next : null;
         }
         front = curr;
     }
 
+    public void out() {
+        Node curr = front;
+        while (curr != null) {
+            System.out.printf("%s ", curr.data);
+            curr = curr.next;
+        }
+        System.err.println();
+    }
 }
