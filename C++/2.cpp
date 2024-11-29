@@ -16,10 +16,9 @@ void write(int x){
 
 
 int main(){
-	freopen("1.in","w",stdout);
-	srand(time(NULL));
-	puts("1");
-	int n=rand()%10+1;cout<<n<<endl;
-	for(int i=1;i<=n;++i)cout<<rand()%n+1<<" ";cout<<endl;
+	int a[2][2]={1,2,3,4};
+	int (*p)[2]=a;
+	printf("%d",*(*(p+1)+1));
+
 	return 0;
 }
