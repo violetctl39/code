@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #define pc putchar
+#define int long long
 using namespace std;
 int read(){
 	int x=0,f=1;char c=getchar();
@@ -13,12 +14,18 @@ void write(int x){
 	pc(x%10+48);
 }
 
+int T,n,m,ans,cnt;
+int a[200005];
+char s[200005];
 
-
-int main(){
-	int a[2][2]={1,2,3,4};
-	int (*p)[2]=a;
-	printf("%d",*(*(p+1)+1));
+void solve(){
+	
+}
+signed main(){
+	T=read();
+	while(T--){
+		solve();
+	}
 
 	return 0;
 }
