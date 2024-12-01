@@ -20,8 +20,7 @@ char s[200005];
 
 void solve(){
     int a=read(),b=read();
-    for(int i=a;i<=a*b;++i)
-        if(i%a==i%b){cout<<i<<endl;return;}
+    write(a*b/__gcd(a,b)),pc('\n');
 }
 signed main(){
     T=read();

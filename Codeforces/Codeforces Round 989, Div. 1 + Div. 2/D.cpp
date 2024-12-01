@@ -24,7 +24,7 @@ int lst(set<int> x){
     return *it;
 }
 void solve(){
-    n=200000;ans=0;
+    n=100000;ans=0;
     vector< pair<int,int> >().swap(v);
     for(int i=0;i<3;++i)set<int>().swap(f[i]);
     for(int i=1;i<=n;++i)a[i]=rand()%3,f[a[i]].insert(i);
