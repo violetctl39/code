@@ -14,77 +14,49 @@ void write(int x){
     pc(x%10+48);
 }
 
-int T,n,m,ans,cnt;
+int T,n,m,ans,c[3];
 int a[200005];
-set<int>f[3];
 vector< pair<int,int> >v;
-int lst(set<int> x){
-    auto it=x.end();
-    it--;
-    return *it;
+vector<int>f[3][3];
+int pos(int x){
+    if(x<=c[0])return 0;
+    else if(x<=c[0]+c[1])return 1;
+    return 2;
 }
-void solve(){
-    n=100000;ans=0;
-    vector< pair<int,int> >().swap(v);
-    for(int i=0;i<3;++i)set<int>().swap(f[i]);
-    for(int i=1;i<=n;++i)a[i]=rand()%3,f[a[i]].insert(i);
-    int siz0=f[0].size(),siz1=f[1].size();
-    if(siz1==n){puts("0");return;}
-    if(!siz0){
-        while(lst(f[1])>siz1){
-            int x=lst(f[1]),y=*f[2].begin();
-            f[1].erase(x);f[2].erase(y);
-            f[1].insert(y);f[2].insert(x);
-            v.push_back({x,y});++ans;
+void ins(int x){
+    f[a[x]][pos(x)].push_back(x);
+}
+void del(int x){
+    f[a[x]][pos(x)].pop_back();
+}
+void mdy(int x,int y){
+    v.push_back({x,y});
+    del(x);del(y);
+    swap(a[x],a[y]);
+    ins(x);ins(y);
+}
+void fix(int x){
+    while (!f[1][x].empty()||!f[2-x][x].empty()){
+        if(f[1][x].empty()){
+            if(!f[1][2-x].empty())
+                mdy(f[2-x][x].back(),f[1][2-x].back());
+            else mdy(f[2-x][x].back(),f[1][1].back());
         }
-        write(ans),pc('\n');
-        for(auto i:v){write(i.first),pc(' ');write(i.second),pc('\n');}
-        return;
-    }
-    if(f[2].size()==0){
-        while(lst(f[0])>siz0){
-            int x=lst(f[0]),y=*f[1].begin();
-            f[0].erase(x);f[1].erase(y);
-            f[0].insert(y);f[1].insert(x);
-            v.push_back({x,y});++ans;
-        }
-        write(ans),pc('\n');
-        for(auto i:v){write(i.first),pc(' ');write(i.second),pc('\n');}
-        return;
+        if(!f[x][1].empty())
+            mdy(f[1][x].back(),f[x][1].back());
+        else mdy(f[1][x].back(),f[x][2-x].back());
     }
     
-    // cerr<<siz0<<" "<<siz1<<" "<<f[2].size()<<endl;
-    while(1){
-        if(*f[1].begin()==siz0+1&&lst(f[1])==siz0+siz1){
-            if(lst(f[0])==siz0)break;
-            int x=lst(f[1]),y=*f[2].begin();
-            f[1].erase(x);f[2].erase(y);
-            f[1].insert(y);f[2].insert(x);
-            v.push_back({x,y});++ans;
-            x=*f[1].begin(),y=lst(f[0]);
-            f[1].erase(x);f[0].erase(y);
-            f[1].insert(y);f[0].insert(x);
-            v.push_back({x,y});++ans;
-        }
-        // out(f[1]);
-        // cout<<*f[1].begin()<<" "<<lst(f[1])<<endl;
-        while(*f[1].begin()<=siz0){
-            int x=*f[1].begin(),y=lst(f[0]);
-            f[1].erase(x);f[0].erase(y);
-            f[1].insert(y);f[0].insert(x);
-            v.push_back({x,y});++ans;
-        }
-        // cout<<lst(f[1])<<" "<<siz0+siz1<<endl;
-        while(lst(f[1])>siz0+siz1){
-            
-            int x=lst(f[1]),y=*f[2].begin();
-            f[1].erase(x);f[2].erase(y);
-            f[1].insert(y);f[2].insert(x);
-            v.push_back({x,y});++ans;
-        }
-
-    }
-    write(ans),pc('\n');
+}
+void solve(){
+    n=read();ans=0;memset(c,0,sizeof c);
+    for(int i=1;i<3;++i)for(int j=0;j<3;++j)vector<int>().swap(f[i][j]);
+    vector< pair<int,int> >().swap(v);
+    for(int i=1;i<=n;++i)a[i]=read(),c[a[i]]++;
+    for(int i=1;i<=n;++i)ins(i);
+    if(c[0]<=c[2])fix(0),fix(2);
+    else fix(2),fix(0);
+    write(v.size()),pc('\n');
     for(auto i:v){write(i.first),pc(' ');write(i.second),pc('\n');}
 }
 int main(){
