@@ -19,7 +19,12 @@ int a[200005];
 char s[200005];
 
 void solve(){
-    
+    n=read();ans=0;cnt=0;
+    for(int i=1;i<=n;++i){
+        int x=read();
+        cnt+=x;
+        if(cnt==(int)sqrt(cnt)*sqrt(cnt)&&(int)sqrt(cnt)%2==1)++ans;
+    }write(ans),pc('\n');
 }
 signed main(){
     T=read();

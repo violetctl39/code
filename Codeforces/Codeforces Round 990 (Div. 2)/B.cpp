@@ -17,9 +17,18 @@ void write(int x){
 int T,n,m,ans,cnt;
 int a[200005];
 char s[200005];
-
+int c[27];
 void solve(){
-    
+    n=read();
+    for(int i=0;i<26;++i)c[i]=0;
+    scanf("%s",s+1);
+    for(int i=1;i<=n;++i)c[s[i]-'a']++;
+    int p1=0,p2=0;
+    while(!c[p1])++p1,++p2;
+    for(int i=p1;i<26;++i)if(c[i]){if(c[i]>c[p1])p1=i; if(c[i]<=c[p2])p2=i;}
+    for(int i=1;i<=n;++i)if(s[i]=='a'+p2){s[i]='a'+p1;break;}
+    for(int i=1;i<=n;++i)pc(s[i]); pc('\n');
+
 }
 signed main(){
     T=read();

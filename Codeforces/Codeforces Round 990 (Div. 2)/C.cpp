@@ -15,11 +15,20 @@ void write(int x){
 }
 
 int T,n,m,ans,cnt;
-int a[200005];
+int a[3][5005],b[5005];
 char s[200005];
 
 void solve(){
-    
+    n=read();ans=-1e9;
+    for(int i=1;i<=2;++i)
+        for(int j=1;j<=n;++j)
+            a[i][j]=read();
+    for(int i=1;i<=n;++i)b[i]=max(a[1][i],a[2][i]);
+    for(int i=1;i<=n;++i){
+        int sum=a[1][i]+a[2][i];
+        for(int j=1;j<=n;++j)if(j!=i)sum+=b[j];
+        ans=max(ans,sum);
+    }write(ans),pc('\n');
 }
 signed main(){
     T=read();
