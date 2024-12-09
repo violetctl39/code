@@ -4,8 +4,6 @@
 // of any Java reference type.
 // See also main program ALvsLL.java 
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 
 public class SimpleLList {
