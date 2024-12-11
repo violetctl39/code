@@ -16,18 +16,13 @@ void write(int x){
 
 int T,n,m,ans,cnt;
 int a[200005];
-multiset<int>s;
-int stk[200005],top;
+char s[200005];
+map<int,int>f;
 void solve(){
-    n=read();top=0;s.clear();
-    for(int i=1;i<=n;++i)a[i]=read();
-    for(int i=1;i<=n;++i){
-        while(top&&stk[top]>a[i]){s.insert(stk[top]+1);--top;}
-        stk[++top]=a[i];
-    }
-    if(!s.empty())while(top&&stk[top]>*s.begin()){s.insert(stk[top]+1);--top;}
-    for(int i=1;i<=top;++i){write(stk[i]),pc(' ');}
-    for(int x:s)write(x),pc(' ');pc('\n');
+    n=read();f.clear();int sum=0;
+    for(int i=1;i<=n;++i)a[i]=read(),f[a[i]]++;
+    for(auto [x,y]:f)if(y==1)++sum;
+    write((sum+1)/2*2+f.size()-sum),pc('\n');
 }
 signed main(){
     T=read();

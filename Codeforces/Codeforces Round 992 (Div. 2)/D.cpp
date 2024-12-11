@@ -15,34 +15,24 @@ void write(int x){
 }
 
 int T,n,m,ans,cnt;
-int a[200005];
+int a[200005],lst;
 vector<int>e[200005];
-queue<int>q;
 void dfs(int x,int f){
-    if(abs(a[f]-q.front())==2){
-        int v=q.front();q.pop();q.push(v);
-        if(q.size()>1){a[x]=q.front();q.pop();}
-        else {a[x]=a[f]-1;return;}
-    }else{
-        a[x]=q.front();q.pop();
-    }
     for(int y:e[x]){
         if(y==f)continue;
-        dfs(y,x);
+        a[y]=lst+1;
+        while(a[y]-a[x]!=1&&a[y]%2!=a[x]%2||a[y]-a[x]==2)++a[y];
+        lst=a[y];dfs(y,x);
     }
-
 }
 void solve(){
-    n=read();a[0]=-2;fill(a+1,a+n+1,0);
-    while(!q.empty())q.pop();
-    for(int i=1;i<=n;++i)e[i].clear(),a[i]=0;
+    n=read();a[1]=1;lst=1;
+    for(int i=1;i<=n;++i)e[i].clear();
     for(int i=1;i<n;++i){
         int u=read(),v=read();
         e[u].push_back(v);
         e[v].push_back(u);
-    }
-    for(int i=1;i<=n;++i)q.push(i*2);
-    dfs(1,0);
+    }dfs(1,0);
     for(int i=1;i<=n;++i)write(a[i]),pc(' ');pc('\n');
 }
 signed main(){

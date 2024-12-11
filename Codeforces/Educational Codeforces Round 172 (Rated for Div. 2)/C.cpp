@@ -14,20 +14,21 @@ void write(int x){
     pc(x%10+48);
 }
 
-int T,n,m,ans,cnt;
+int T,n,k,ans,cnt;
 int a[200005];
-multiset<int>s;
-int stk[200005],top;
+char s[200005];
+int suf[200005];
 void solve(){
-    n=read();top=0;s.clear();
-    for(int i=1;i<=n;++i)a[i]=read();
-    for(int i=1;i<=n;++i){
-        while(top&&stk[top]>a[i]){s.insert(stk[top]+1);--top;}
-        stk[++top]=a[i];
+    n=read(),k=read();cnt=0;
+    scanf("%s",s+1);suf[n+1]=0;
+    for(int i=n;i>=1;--i)suf[i]=suf[i+1]+(s[i]=='1'?1:-1);
+    for(int i=2;i<=n;++i)if(suf[i]>0)a[++cnt]=suf[i];
+    sort(a+1,a+cnt+1,greater<int>());int sum=0;
+    for(int i=1;i<=cnt;++i){
+        sum+=a[i];
+        if(sum>=k){write(i+1),pc('\n');return;}
     }
-    if(!s.empty())while(top&&stk[top]>*s.begin()){s.insert(stk[top]+1);--top;}
-    for(int i=1;i<=top;++i){write(stk[i]),pc(' ');}
-    for(int x:s)write(x),pc(' ');pc('\n');
+    puts("-1");
 }
 signed main(){
     T=read();
