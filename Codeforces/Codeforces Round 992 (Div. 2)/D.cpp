@@ -14,26 +14,24 @@ void write(int x){
     pc(x%10+48);
 }
 
-int T,n,m,ans,cnt;
+int T,n,m,ans;
 int a[200005];
+int pri[400005],cnt;
+bool vis[400005];
+int can[400005];
 vector<int>e[200005];
 queue<int>q;
 void dfs(int x,int f){
-    if(abs(a[f]-q.front())==2){
-        int v=q.front();q.pop();q.push(v);
-        if(q.size()>1){a[x]=q.front();q.pop();}
-        else {a[x]=a[f]-1;return;}
-    }else{
-        a[x]=q.front();q.pop();
-    }
-    for(int y:e[x]){
-        if(y==f)continue;
-        dfs(y,x);
+    if(x==1){a[x]=1;vis[1]=true;}
+    else{
+        for(int i=1;i<=cnt;++i)
+            if(a[f]+p)
     }
 
 }
 void solve(){
     n=read();a[0]=-2;fill(a+1,a+n+1,0);
+    fill(vis+1,vis+2*n+1,false);
     while(!q.empty())q.pop();
     for(int i=1;i<=n;++i)e[i].clear(),a[i]=0;
     for(int i=1;i<n;++i){
@@ -47,6 +45,14 @@ void solve(){
 }
 signed main(){
     T=read();
+    for(int i=2;i<=400000;++i){
+        if(!vis[i])pri[++cnt]=i;
+        for(int j=1;j<=cnt&&pri[j]*i<=400000;++j){
+            vis[i*pri[j]]=true;
+            if(i%pri[j]==0)break;
+        }
+    }cnt=0;
+    for(int i=1;i<=400000;++i)if(!vis[i])t[++cnt]=i;
     while(T--){
         solve();
     }

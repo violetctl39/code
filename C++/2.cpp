@@ -14,18 +14,21 @@ void write(int x){
 	pc(x%10+48);
 }
 
-int T,n,m,ans,cnt;
-int a[200005];
-char s[200005];
-
-void solve(){
-	
+int qpow(int x,int y,int mod){
+	int res=1,tmp=y;x%=mod;
+	for(int i=0,bs=1;i<=30;++i){
+		if((y&bs)!=0){
+			write(bs),pc(' ');
+			write(x),pc('\n');
+			res=res*x%mod;
+		}
+		bs<<=1ll;x=x*x%mod;
+	}return res;
 }
-signed main(){
-	T=read();
-	while(T--){
-		solve();
-	}
 
+signed main(){
+	cout<<qpow(17,39,264)<<endl;
+	cout<<qpow(65,233,299)<<endl;
+	cout<<qpow(260,17,299)<<endl;
 	return 0;
 }
