@@ -37,14 +37,6 @@ void solve(){
 }
 signed main(){
     T=read();
-    for(int i=2;i<=400000;++i){
-        if(!vis[i])pri[++cnt]=i;
-        for(int j=1;j<=cnt&&pri[j]*i<=400000;++j){
-            vis[i*pri[j]]=true;
-            if(i%pri[j]==0)break;
-        }
-    }cnt=0;
-    for(int i=1;i<=400000;++i)if(!vis[i])t[++cnt]=i;
     while(T--){
         solve();
     }
