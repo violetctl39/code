@@ -14,33 +14,25 @@ void write(int x){
     pc(x%10+48);
 }
 
-int T,n,m,ans;
-int a[200005];
-int pri[400005],cnt;
-bool vis[400005];
-int can[400005];
+int T,n,m,ans,cnt;
+int a[200005],lst;
 vector<int>e[200005];
-queue<int>q;
 void dfs(int x,int f){
-    if(x==1){a[x]=1;vis[1]=true;}
-    else{
-        for(int i=1;i<=cnt;++i)
-            if(a[f]+p)
+    for(int y:e[x]){
+        if(y==f)continue;
+        a[y]=lst+1;
+        while(a[y]-a[x]!=1&&a[y]%2!=a[x]%2||a[y]-a[x]==2)++a[y];
+        lst=a[y];dfs(y,x);
     }
-
 }
 void solve(){
-    n=read();a[0]=-2;fill(a+1,a+n+1,0);
-    fill(vis+1,vis+2*n+1,false);
-    while(!q.empty())q.pop();
-    for(int i=1;i<=n;++i)e[i].clear(),a[i]=0;
+    n=read();a[1]=1;lst=1;
+    for(int i=1;i<=n;++i)e[i].clear();
     for(int i=1;i<n;++i){
         int u=read(),v=read();
         e[u].push_back(v);
         e[v].push_back(u);
-    }
-    for(int i=1;i<=n;++i)q.push(i*2);
-    dfs(1,0);
+    }dfs(1,0);
     for(int i=1;i<=n;++i)write(a[i]),pc(' ');pc('\n');
 }
 signed main(){
