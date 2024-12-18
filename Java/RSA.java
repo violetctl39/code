@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Scanner;
+import java.lang.Math;
 public class RSA{
 
     static long quickPow(long x,long y,long mod){
