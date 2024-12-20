@@ -187,8 +187,8 @@ public class ex18
 			// initially in subclass Fish, NOT in superclass Animal.
 			// Remove the comments to see the result.
 			
-			if (A[i] instanceof Fish)
-				System.out.println(A[i].getWaterType() + " is fun!");
+			// if (A[i] instanceof Fish)
+			// 	System.out.println(A[i].getWaterType() + " is fun!");
 			
 
 			// This code is fine -- we are checking the class using the
