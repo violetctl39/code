@@ -1,4 +1,3 @@
-package leture17;
 
 //CMPINF 0401 Summer 2024
 //Simple class to represent a Song.  Note that this class could be much more

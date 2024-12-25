@@ -1,4 +1,3 @@
-package leture17;
 // CMPINF 0401 Summer 2024
 // Simple Java interface with one method
 // Generally, an interface is used to state a list of method

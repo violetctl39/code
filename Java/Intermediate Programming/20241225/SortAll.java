@@ -2,7 +2,6 @@
 // Modification of Gaddis selectionSort so that it sorts an array of
 // any Comparable object.  Compare this handout to SortInt.java and
 // to SortAllT.java
-import java.lang.Comparable;
 public class SortAll
 {
    // Note that the parameter type is the interface Comparable.  This

@@ -1,4 +1,3 @@
-package leture17;
 // CMPINF 0401 Summer 2024
 // Demonstration of "generic" operations in Java
 // We are sorting various different Comparable objects using the same

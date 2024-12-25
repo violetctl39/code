@@ -1,4 +1,3 @@
-package leture17;
 // CMPINF 0401 Summer 2024
 // Demonstration of interfaces in Java. 
 

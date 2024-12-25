@@ -4,7 +4,6 @@
 // to access objects of all of its subclasses.  Also, methods that ARE
 // defined in this class (ex: toString()) can be used by subclass
 // objects
-package leture17;
 
 abstract class Animal
 {
