@@ -68,6 +68,6 @@ public class ex17
 		bmax1 = max(d1, d2, d3); // Matches a version exactly
 		bmax1 = max(i1, i2, i3); // Least widening is for int int
 								 // double (only one param widened)
-		bmax1 = max(i1, i2);
+		bmax1 = Math.max(i1, i2);
 	}
 }
