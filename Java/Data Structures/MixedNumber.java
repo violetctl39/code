@@ -76,6 +76,10 @@ public class MixedNumber extends Fraction {
         return whole + " " + Math.abs(numerator) + "/" + denominator;
     }
 
+    public boolean equals(MixedNumber other) {
+        return toFraction().equals(other.toFraction());
+    }
+
     public int compareTo(MixedNumber other) {
         return toFraction().compareTo(other.toFraction());
     }
