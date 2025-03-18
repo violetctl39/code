@@ -15,7 +15,7 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             theDeque[0] = element;
             size++;
         } else {
-            throw new NullPointerException("Deque is full");
+            throw new IllegalStateException("Deque is full");
         }
     }
 
@@ -24,7 +24,7 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             theDeque[size] = element;
             size++;
         } else {
-            throw new NullPointerException("Deque is full");
+            throw new IllegalStateException("Deque is full");
         }
     }
 
@@ -38,24 +38,45 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             size--;
             return temp;
         } else {
-            throw new NullPointerException("Deque is empty");
+            throw new IllegalStateException("Deque is empty");
         }
     }
-    public T removeBack(){
+
+    public T removeBack() {
         if (size > 0) {
             T temp = theDeque[size - 1];
             theDeque[size - 1] = null;
             size--;
             return temp;
         } else {
-            throw new NullPointerException("Deque is empty");
+            throw new IllegalStateException("Deque is empty");
         }
     }
-    public T getFront(){
+
+    public T getFront() {
         if (size > 0) {
             return theDeque[0];
         } else {
             throw new NullPointerException("Deque is empty");
         }
+    }
+
+    public T getBack() {
+        if (size > 0) {
+            return theDeque[size - 1];
+        } else {
+            throw new NullPointerException("Deque is empty");
+        }
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            theDeque[i] = null;
+        }
+        size = 0;
     }
 }
