@@ -1,0 +1,61 @@
+Trying to add 0 added to Deques
+Trying to add 2 added to Deques
+Trying to add 4 added to Deques
+Trying to add 6 added to Deques
+Trying to add 8 added to Deques
+No room, 8 not added
+Trying to add 10 added to Deques
+No room, 10 not added
+Trying to add 12 added to Deques
+No room, 12 not added
+Trying to add 14 added to Deques
+No room, 14 not added
+Trying to add 16 added to Deques
+No room, 16 not added
+No room, 16 not added
+Trying to add 18 added to Deques
+No room, 18 not added
+No room, 18 not added
+
+D1: 0, 2, 4, 6
+D2: 0, 2, 4, 6, 8, 10, 12, 14
+
+Front of D1: 0
+Back of D2: 14
+
+Front: 0
+Front: 2
+Front: 4
+Front: 6
+Nothing in D1
+
+Back: 14
+Back: 12
+Back: 10
+Back: 8
+Back: 6
+Back: 4
+Back: 2
+Back: 0
+Nothing in D2
+
+Adding Item 1
+Adding Item 2
+Removing Item 1
+Adding Item 3
+Removing Item 2
+Adding Item 4
+Removing Item 3
+Adding Item 5
+Removing Item 4
+Adding Item 6
+Removing Item 5
+Adding Item 7
+Removing Item 6
+Adding Item 8
+Removing Item 7
+Adding Item 9
+Removing Item 8
+D3: Item 9
+D3: Item 9, Another item, Yet another item
+D3: Deque is Empty
