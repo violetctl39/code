@@ -1,16 +1,24 @@
 interface FractionInterface {
     public Fraction add(Fraction other);
+
     public Fraction sub(Fraction other);
+
     public Fraction mul(Fraction other);
+
     public Fraction div(Fraction other);
+
     public Fraction reciprocal();
+
     public String toString();
+
     public boolean equals(Fraction other);
+
     public int compareTo(Fraction other);
 }
+
 public class Fraction implements FractionInterface {
-    private int numerator;
-    private int denominator;
+    protected int numerator;
+    protected int denominator;
 
     private int gcd(int x, int y) {
         return y == 0 ? x : gcd(x, x % y);
