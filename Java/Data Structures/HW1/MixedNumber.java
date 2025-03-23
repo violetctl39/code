@@ -17,35 +17,12 @@ public class MixedNumber extends Fraction {
         return new Fraction(whole * denominator + numerator, denominator);
     }
 
-    public void setWhole(int whole) {
-        numerator += whole * denominator;
-        this.whole = numerator / denominator;
-        numerator %= denominator;
-    }
-
-    public void setNumerator(int numerator) {
-        numerator += whole * denominator;
-        whole = numerator / denominator;
-        numerator %= denominator;
-        this.numerator = numerator;
-    }
-
-    public void setDenominator(int denominator) {
-        if (denominator == 0) {
-            throw new IllegalArgumentException("Denominator cannot be zero");
-        }
-        numerator += whole * denominator;
-        whole = numerator / denominator;
-        numerator %= denominator;
-        this.denominator = denominator;
-    }
-
     public int getWhole() {
         return whole;
     }
 
     public int getNumerator() {
-        return Math.abs(numerator);
+        return whole == 0 ? numerator : Math.abs(numerator);
     }
 
     public int getDenominator() {
@@ -73,6 +50,7 @@ public class MixedNumber extends Fraction {
     }
 
     public String toString() {
+        if(whole == 0) return numerator + "/" + denominator;
         return whole + " " + Math.abs(numerator) + "/" + denominator;
     }
 

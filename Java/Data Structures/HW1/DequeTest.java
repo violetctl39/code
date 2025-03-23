@@ -9,6 +9,12 @@ public class DequeTest
 {
 	public static void main(String [] args)
 	{
+		try {
+			System.setOut(new java.io.PrintStream(new java.io.File("My DequeTest-out.txt")));
+		} catch (java.io.FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
 		DequeInterface<Integer> D1 = new SimpleDeque<Integer>(4);
 		DequeInterface<Integer> D2 = new SimpleDeque<Integer>(8);
 

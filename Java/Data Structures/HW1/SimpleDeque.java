@@ -14,18 +14,16 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             }
             theDeque[0] = element;
             size++;
-        } else {
-            throw new IllegalStateException("Deque is full");
-        }
+        } else
+            System.out.println("No room, " + element.toString() + " not added");
     }
 
     public void addToBack(T element) {
         if (size < theDeque.length) {
             theDeque[size] = element;
             size++;
-        } else {
-            throw new IllegalStateException("Deque is full");
-        }
+        } else
+            System.out.println("No room, " + element.toString() + " not added");
     }
 
     public T removeFront() {
@@ -37,9 +35,8 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             theDeque[size - 1] = null;
             size--;
             return temp;
-        } else {
-            throw new IllegalStateException("Deque is empty");
-        }
+        } else
+            return null;
     }
 
     public T removeBack() {
@@ -48,25 +45,22 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             theDeque[size - 1] = null;
             size--;
             return temp;
-        } else {
-            throw new IllegalStateException("Deque is empty");
-        }
+        } else
+            return null;
     }
 
     public T getFront() {
         if (size > 0) {
             return theDeque[0];
-        } else {
-            throw new NullPointerException("Deque is empty");
-        }
+        } else
+            return null;
     }
 
     public T getBack() {
         if (size > 0) {
             return theDeque[size - 1];
-        } else {
-            throw new NullPointerException("Deque is empty");
-        }
+        } else
+            return null;
     }
 
     public boolean isEmpty() {
@@ -78,5 +72,14 @@ public class SimpleDeque<T> implements DequeInterface<T> {
             theDeque[i] = null;
         }
         size = 0;
+    }
+
+    public String toString() {
+        if (size == 0)
+            return "Deque is Empty";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++)
+            sb.append(theDeque[i] + (i!=size-1?", ":""));
+        return sb.toString();
     }
 }
