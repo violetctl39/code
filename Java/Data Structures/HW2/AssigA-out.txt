@@ -1,0 +1,63 @@
+0 added to Deque
+2 added to Deque
+4 added to Deque
+6 added to Deque
+8 added to Deque
+10 added to Deque
+12 added to Deque
+14 added to Deque
+16 added to Deque
+18 added to Deque
+
+D1: Contents: 0 2 4 6 8 10 12 14 16 18 
+D1 size: 10 and capacity: 16
+D2: Contents: 0 2 4 6 8 10 12 14 16 18 
+D2 size: 10 and capacity: 12
+
+Front: 0 Back: 18
+Front: 2 Back: 16
+Front: 4 Back: 14
+Front: 6 Back: 12
+Front: 8 Back: 10
+Front: 10 Back: 8
+Front: 12 Back: 6
+Front: 14 Back: 4
+Front: 16 Back: 2
+Front: 18 Back: 0
+Nothing in D
+
+Adding Item 1
+Adding Item 2
+Removing Item 1
+Adding Item 3
+Removing Item 2
+Adding Item 4
+Removing Item 3
+Adding Item 5
+Removing Item 4
+Adding Item 6
+Removing Item 5
+Adding Item 7
+Removing Item 6
+Adding Item 8
+Removing Item 7
+Adding Item 9
+Removing Item 8
+There are 1 items in the deque
+The capacity is 5
+
+Contents: 1 2 3 4 5 
+Contents: 1 2 3 4 5 
+Deques are equal
+
+Contents: 1 2 3 4 
+Deques are not equal
+Contents: 1 2 3 4 99 
+Deques are not equal
+
+Contents: 1 2 3 4 5 
+Deques are equal
+
+Contents: 1 2 3 4 5 88 
+Deques are not equal
+

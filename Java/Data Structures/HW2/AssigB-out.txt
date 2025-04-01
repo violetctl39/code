@@ -1,0 +1,51 @@
+Initializing a new IndexDeque...
+Contents: 1 2 3 4 5 6 7 
+
+Removing 3 items then adding 1
+Contents: 4 5 6 7 8 
+
+Testing Indexable...
+Front to back: 4 5 6 7 8 
+Contents: 5 6 7 8 9 
+Back to front: 9 8 7 6 5 
+Contents: 6 7 8 9 10 
+java.lang.IndexOutOfBoundsException: Illegal Index 5
+
+Testing IndexableAddRemove
+Capacity is 10
+Contents: 1 2 3 4 5 6 
+
+Adding some data...
+Add at index 1 from front
+Add at index 1 from back
+Contents: 1 88 2 3 4 5 77 6 
+
+Removing some data...
+Removed 2 at index 2 from front
+Removed 5 at index 2 from back
+Contents: 1 88 3 4 77 6 
+
+More adding (causing a resize)
+Adding 10 at index 1 from front
+Adding 20 at index 2 from front
+Adding 30 at index 3 from front
+Adding 40 at index 4 from front
+Adding 50 at index 5 from front
+Contents: 1 10 20 30 40 50 88 3 4 77 6 
+Capacity is 20
+
+Deleting everything (in perhaps an inefficient way)
+Removed 1
+Removed 10
+Removed 20
+Removed 30
+Removed 40
+Removed 50
+Removed 88
+Removed 3
+Removed 4
+Removed 77
+Removed 6
+Contents: 
+Adding some items back
+Contents: 10 20 
