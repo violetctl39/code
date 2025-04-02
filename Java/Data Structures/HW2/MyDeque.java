@@ -1,8 +1,8 @@
+@SuppressWarnings("unchecked")
 public class MyDeque<T> implements DequeInterface<T> {
     protected T[] theDeque;
     protected int size, front, back;
 
-    @SuppressWarnings("unchecked")
     public MyDeque(int initsize) {
         theDeque = (T[]) new Object[initsize];
         size = 0;
@@ -10,13 +10,37 @@ public class MyDeque<T> implements DequeInterface<T> {
         back = -1;
     }
 
+    public MyDeque(MyDeque<T> old) {
+        theDeque = old.theDeque.clone();
+        size = old.size;
+        front = old.front;
+        back = old.back;
+    }
+
+    protected int nxt(int i) {
+        return i == theDeque.length - 1 ? 0 : i + 1;
+    }
+
+    protected int pre(int i) {
+        return i == 0 ? theDeque.length - 1 : i - 1;
+    }
+
+    protected void resize() {
+        T[] newDeque = (T[]) new Object[theDeque.length * 2];
+        for (int i = front, j = 0;; i = nxt(i), ++j) {
+            newDeque[j] = theDeque[i];
+            if (i == back)
+                break;
+        }
+        front = 0;
+        back = size - 1;
+        theDeque = newDeque;
+    }
+
     public void addToFront(T newEntry) {
-        if (size == theDeque.length)
-            return;
-        if (front == 0)
-            front = theDeque.length - 1;
-        else
-            front--;
+        if (size == theDeque.length - 1)
+            resize();
+        front = pre(front);
         size++;
         theDeque[front] = newEntry;
         if (back == -1)
@@ -24,12 +48,9 @@ public class MyDeque<T> implements DequeInterface<T> {
     }
 
     public void addToBack(T newEntry) {
-        if (size == theDeque.length)
-            return;
-        if (back == theDeque.length - 1)
-            back = 0;
-        else
-            back++;
+        if (size == theDeque.length - 1)
+            resize();
+        back = back == -1 ? 0 : nxt(back);
         size++;
         theDeque[back] = newEntry;
 
@@ -39,38 +60,32 @@ public class MyDeque<T> implements DequeInterface<T> {
         if (size == 0)
             return null;
         if (size == 1) {
-            T temp = theDeque[front];
+            T theFront = theDeque[front];
+            size=0;
             front = 0;
             back = -1;
-            return temp;
+            return theFront;
         }
-        if (front == theDeque.length - 1) {
-            front = 0;
-            size--;
-            return theDeque[theDeque.length - 1];
-        }
-        front++;
+        T theFront = theDeque[front];
+        front = nxt(front);
         size--;
-        return theDeque[front - 1];
+        return theFront;
     }
 
     public T removeBack() {
         if (size == 0)
             return null;
         if (size == 1) {
-            T temp = theDeque[back];
+            T theBack = theDeque[back];
+            size=0;
             front = 0;
             back = -1;
-            return temp;
+            return theBack;
         }
-        if (back == 0) {
-            back = theDeque.length - 1;
-            size--;
-            return theDeque[0];
-        }
-        back--;
+        T theBack = theDeque[back];
+        back = pre(back);
         size--;
-        return theDeque[back + 1];
+        return theBack;
     }
 
     public T getFront() {
@@ -101,5 +116,30 @@ public class MyDeque<T> implements DequeInterface<T> {
 
     public int capacity() {
         return theDeque.length;
+    }
+
+    public boolean equals(MyDeque<T> rhs) {
+        if (size != rhs.size)
+            return false;
+        int lpos = front, rpos = rhs.front;
+        for (int i = 0; i < size; ++i) {
+            if (theDeque[lpos] != rhs.theDeque[rpos])
+                return false;
+            lpos = nxt(lpos);
+            rpos = nxt(rpos);
+        }
+        return true;
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("Contents: ");
+        if(size==0)return s.toString();
+        for (int i = front;; i = nxt(i)) {
+            s.append(theDeque[i]+" ");
+            if (i == back)
+                break;
+        }
+        return s.toString();
     }
 }
