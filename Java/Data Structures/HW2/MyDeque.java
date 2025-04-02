@@ -61,7 +61,7 @@ public class MyDeque<T> implements DequeInterface<T> {
             return null;
         if (size == 1) {
             T theFront = theDeque[front];
-            size=0;
+            size = 0;
             front = 0;
             back = -1;
             return theFront;
@@ -77,7 +77,7 @@ public class MyDeque<T> implements DequeInterface<T> {
             return null;
         if (size == 1) {
             T theBack = theDeque[back];
-            size=0;
+            size = 0;
             front = 0;
             back = -1;
             return theBack;
@@ -134,9 +134,10 @@ public class MyDeque<T> implements DequeInterface<T> {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Contents: ");
-        if(size==0)return s.toString();
+        if (size == 0)
+            return s.toString();
         for (int i = front;; i = nxt(i)) {
-            s.append(theDeque[i]+" ");
+            s.append(theDeque[i] + " ");
             if (i == back)
                 break;
         }

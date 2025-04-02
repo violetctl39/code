@@ -29,7 +29,10 @@ public class IndexAddRemoveDeque<T> extends IndexDeque<T> implements IndexableAd
             theDeque[j] = theDeque[nxt(j)];
         back = pre(back);
         size--;
-        if(size==0){front=0;back=-1;}
+        if (size == 0) {
+            front = 0;
+            back = -1;
+        }
         return theItem;
     }
 
