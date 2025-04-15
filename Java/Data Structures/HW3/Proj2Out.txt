@@ -1,0 +1,29 @@
+B1 contains:
+Fezzik Inigo Buttercup Fezzik Westley 
+
+B2 contains:
+Inigo Fezzik Vizzini Humperdinck Rugen 
+
+B1 union B2 contains:
+Rugen Humperdinck Vizzini Fezzik Inigo Westley Fezzik Buttercup Inigo Fezzik 
+
+B1 intersect B2 contains:
+Inigo Fezzik 
+
+B1 diff B2 contains:
+Westley Fezzik Buttercup 
+
+B2 diff B1 contains:
+Rugen Humperdinck Vizzini 
+
+(B1 union B2) union B1 contains:
+Westley Fezzik Buttercup Inigo Fezzik Fezzik Inigo Buttercup Fezzik Westley Inigo Fezzik Vizzini Humperdinck Rugen 
+
+(B1 union B2) intersect B1 contains:
+Buttercup Fezzik Westley Inigo Fezzik 
+
+(B1 union B2) difference B1 contains:
+Fezzik Inigo Vizzini Humperdinck Rugen 
+
+B1 difference (B1 union B2) contains:
+
