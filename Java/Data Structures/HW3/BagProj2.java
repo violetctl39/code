@@ -29,6 +29,11 @@ public class BagProj2
 		
 	public static void main(String [] args)
 	{
+		try {
+			System.setOut(new java.io.PrintStream(new java.io.FileOutputStream("MyProj2Out.txt")));
+		} catch (java.io.FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		String [] data1 = {"Westley", "Fezzik", "Buttercup", "Inigo", "Fezzik"};
 		String [] data2 = {"Rugen", "Humperdinck", "Vizzini", "Fezzik", "Inigo"};
 		
