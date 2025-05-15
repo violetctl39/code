@@ -106,7 +106,7 @@ public class DoubleRecList {
 	// Method to reverse the data in the list.
 	// You must implement this method. See comments in the document.
 	public void reverse() {
-		rec_reverse(front);
+		rec_reverse(front)
 	}
 
 	private void rec_reverse(Node<String> curr) {
