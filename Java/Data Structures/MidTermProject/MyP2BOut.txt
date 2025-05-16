@@ -1,0 +1,80 @@
+Testing N = 50000:
+Testing append: 
+		Total time: 2981800 ns for 50000 appends
+		Time per append: 59.636 ns
+Testing delete from back: 
+		Total time: 3304400 ns for 50000 deletes
+		Time per delete: 66.088 ns
+Testing insert(0): 
+		Total time: 3188000 ns for 50000 inserts
+		Time per insert: 63.76 ns
+Testing delete from front: 
+		Total time: 200 ns for 0 deletes
+		Time per delete: Infinity ns
+Testing insert(mid): 
+		Total time: 1419100 ns for 50000 inserts
+		Time per insert: 28.382 ns
+Testing delete from middle: 
+		Total time: 100 ns for 0 deletes
+		Time per delete: Infinity ns
+
+Testing N = 100000:
+Testing append: 
+		Total time: 5717100 ns for 100000 appends
+		Time per append: 57.171 ns
+Testing delete from back: 
+		Total time: 4212700 ns for 100000 deletes
+		Time per delete: 42.127 ns
+Testing insert(0): 
+		Total time: 2396900 ns for 100000 inserts
+		Time per insert: 23.969 ns
+Testing delete from front: 
+		Total time: 100 ns for 0 deletes
+		Time per delete: Infinity ns
+Testing insert(mid): 
+		Total time: 2811700 ns for 100000 inserts
+		Time per insert: 28.117 ns
+Testing delete from middle: 
+		Total time: 100 ns for 0 deletes
+		Time per delete: Infinity ns
+
+Testing N = 200000:
+Testing append: 
+		Total time: 2987200 ns for 200000 appends
+		Time per append: 14.936 ns
+Testing delete from back: 
+		Total time: 2139800 ns for 200000 deletes
+		Time per delete: 10.699 ns
+Testing insert(0): 
+		Total time: 6376700 ns for 200000 inserts
+		Time per insert: 31.8835 ns
+Testing delete from front: 
+		Total time: 200 ns for 0 deletes
+		Time per delete: Infinity ns
+Testing insert(mid): 
+		Total time: 927900 ns for 200000 inserts
+		Time per insert: 4.6395 ns
+Testing delete from middle: 
+		Total time: 200 ns for 0 deletes
+		Time per delete: Infinity ns
+
+Testing N = 400000:
+Testing append: 
+		Total time: 3524100 ns for 400000 appends
+		Time per append: 8.81025 ns
+Testing delete from back: 
+		Total time: 2520800 ns for 400000 deletes
+		Time per delete: 6.302 ns
+Testing insert(0): 
+		Total time: 4187400 ns for 400000 inserts
+		Time per insert: 10.4685 ns
+Testing delete from front: 
+		Total time: 200 ns for 0 deletes
+		Time per delete: Infinity ns
+Testing insert(mid): 
+		Total time: 2861400 ns for 400000 inserts
+		Time per insert: 7.1535 ns
+Testing delete from middle: 
+		Total time: 200 ns for 0 deletes
+		Time per delete: Infinity ns
+

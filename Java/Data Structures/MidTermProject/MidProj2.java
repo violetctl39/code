@@ -14,6 +14,11 @@ public class MidProj2
 {
 	public static void main(String [] args)
 	{
+		try {
+			System.setOut(new java.io.PrintStream(new java.io.FileOutputStream("MyP2Out.txt")));
+		} catch (java.io.FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Testing constructor methods");
 		MyStringBuilder b1 = new MyStringBuilder("this is a string");
 		char [] c = {' ','a','n','o','t','h','e','r',' ','s','t','r','i','n','g'};

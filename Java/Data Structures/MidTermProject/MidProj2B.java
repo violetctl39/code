@@ -137,6 +137,11 @@ public class MidProj2B
 	
 	public static void main(String [] args)
 	{
+		try {
+			System.setOut(new java.io.PrintStream(new java.io.FileOutputStream("MyP2BOut.txt")));
+		} catch (java.io.FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		MidProj2B E = new MidProj2B();
 	}
 }

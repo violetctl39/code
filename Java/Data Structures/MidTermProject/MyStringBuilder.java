@@ -120,13 +120,12 @@ public class MyStringBuilder {
 			length = 1;
 		} else {
 			firstC = new CNode(old.firstC.data, old.firstC.next, old.firstC.prev);
-			length = 1;
+			length = old.length;
 			CNode currNode = firstC;
-			while (currNode.next != firstC) {
+			for (int i = 1; i < length; ++i) {
 				CNode newNode = new CNode(currNode.next.data, currNode.next.next, currNode);
 				currNode.next = newNode;
 				currNode = newNode;
-				length++;
 			}
 			currNode.next = firstC;
 			firstC.prev = currNode;
@@ -148,21 +147,23 @@ public class MyStringBuilder {
 	public MyStringBuilder append(MyStringBuilder b) {
 		if (b == null || b.length == 0)
 			return this;
-		CNode currNodeA = this.firstC.prev, currNodeB = b.firstC;
-		CNode newNode = new CNode(currNodeB.data, currNodeB.next, currNodeA);
-		currNodeA.next = newNode;
-		currNodeA = newNode;
-		currNodeB = currNodeB.next;
-		length++;
-		while (currNodeB != b.firstC) {
-			newNode = new CNode(currNodeB.data, currNodeB.next, currNodeA);
-			currNodeA.next = newNode;
-			currNodeA = newNode;
-			currNodeB = currNodeB.next;
-			length++;
+		CNode currNode = firstC.prev, newNode;
+		if (length == 0) {
+			newNode = new CNode(b.firstC.data, b.firstC.next, b.firstC.prev);
+			firstC = newNode;
+		} else {
+			newNode = new CNode(b.firstC.data, b.firstC.next, currNode);
+			currNode.next = newNode;
 		}
-		currNodeA.next = firstC;
-		firstC.prev = currNodeA;
+		currNode = newNode;
+		length += b.length;
+		for (int i = 1; i < b.length; ++i) {
+			newNode = new CNode(currNode.next.data, currNode.next.next, currNode);
+			currNode.next = newNode;
+			currNode = newNode;
+		}
+		currNode.next = firstC;
+		firstC.prev = currNode;
 		return this;
 	}
 
@@ -171,13 +172,22 @@ public class MyStringBuilder {
 	public MyStringBuilder append(String s) {
 		if (s == null || s.length() == 0)
 			return this;
-		CNode currNode = this.firstC.prev;
-		for (int i = 0; i < s.length(); ++i) {
-			CNode newNode = new CNode(s.charAt(i));
+		CNode currNode;
+		CNode newNode = new CNode(s.charAt(0));
+		if (length == 0)
+			firstC = newNode;
+		else {
+			currNode = this.firstC.prev;
+			currNode.next = newNode;
+			newNode.prev = currNode;
+		}
+		currNode = newNode;
+		length += s.length();
+		for (int i = 1; i < s.length(); ++i) {
+			newNode = new CNode(s.charAt(i));
 			newNode.prev = currNode;
 			currNode.next = newNode;
 			currNode = newNode;
-			length++;
 		}
 		currNode.next = firstC;
 		firstC.prev = currNode;
@@ -189,13 +199,22 @@ public class MyStringBuilder {
 	public MyStringBuilder append(char[] c) {
 		if (c == null || c.length == 0)
 			return this;
-		CNode currNode = this.firstC.prev;
-		for (int i = 0; i < c.length; ++i) {
-			CNode newNode = new CNode(c[i]);
+		CNode currNode;
+		CNode newNode = new CNode(c[0]);
+		if (length == 0)
+			firstC = newNode;
+		else {
+			currNode = this.firstC.prev;
+			currNode.next = newNode;
+			newNode.prev = currNode;
+		}
+		currNode = newNode;
+		length += c.length;
+		for (int i = 1; i < c.length; ++i) {
+			newNode = new CNode(c[i]);
 			newNode.prev = currNode;
 			currNode.next = newNode;
 			currNode = newNode;
-			length++;
 		}
 		currNode.next = firstC;
 		firstC.prev = currNode;
@@ -205,10 +224,16 @@ public class MyStringBuilder {
 	// Append char c to the end of the current MyStringBuilder, and
 	// return the current MyStringBuilder. Be careful for special cases!
 	public MyStringBuilder append(char c) {
+		if (length == 0) {
+			firstC = new CNode(c, firstC, firstC);
+			length = 1;
+			return this;
+		}
 		CNode currNode = this.firstC.prev;
 		CNode newNode = new CNode(c, firstC, currNode);
 		currNode.next = newNode;
 		firstC.prev = newNode;
+		length++;
 		return this;
 	}
 
@@ -247,10 +272,13 @@ public class MyStringBuilder {
 				prevNode = currNode.prev;
 			if (i == end - 1)
 				nextNode = currNode.next;
+			currNode = currNode.next;
 		}
 		length -= end - start;
 		prevNode.next = nextNode;
 		nextNode.prev = prevNode;
+		if (start == 0)
+			firstC = nextNode;
 		return this;
 	}
 
@@ -278,15 +306,19 @@ public class MyStringBuilder {
 		}
 		CNode currNode = firstC;
 		CNode prevNode = null, nextNode = null;
-		for (int i = 0; i < length; ++i)
+		for (int i = 0; i < length; ++i) {
 			if (i == index) {
 				prevNode = currNode.prev;
 				nextNode = currNode.next;
 				break;
 			}
+			currNode = currNode.next;
+		}
 		length--;
 		prevNode.next = nextNode;
 		nextNode.prev = prevNode;
+		if (index == 0)
+			firstC = nextNode;
 		return this;
 	}
 
@@ -296,8 +328,28 @@ public class MyStringBuilder {
 	// within the current MyStringBuilder, return -1. Think carefully about
 	// what you need to do for this method before implementing it.
 	public int indexOf(String str) {
-		
-
+		if (length < str.length())
+			return -1;
+		int[] kmp = new int[length];
+		kmp[0] = -1;
+		for (int i = 1, j = -1; i < str.length(); ++i) {
+			while (j != -1 && str.charAt(j + 1) != str.charAt(i))
+				j = kmp[j];
+			if (str.charAt(i) == str.charAt(j + 1))
+				++j;
+			kmp[i] = j;
+		}
+		CNode currNode = firstC;
+		for (int i = 0, j = -1; i < length; ++i) {
+			while (j != -1 && str.charAt(j + 1) != currNode.data)
+				j = kmp[j];
+			if (str.charAt(j + 1) == currNode.data)
+				++j;
+			if (j == str.length() - 1)
+				return i - (str.length() - 1);
+			currNode = currNode.next;
+		}
+		return -1;
 	}
 
 	// Insert String str into the current MyStringBuilder starting at index
@@ -305,6 +357,32 @@ public class MyStringBuilder {
 	// length, this is the same as append. If "offset" is invalid
 	// do nothing.
 	public MyStringBuilder insert(int offset, String str) {
+		if (offset < 0 || offset > length)
+			return this;
+		if (length == 0)
+			return new MyStringBuilder(str);
+		CNode currNode = firstC;
+		CNode prevNode = null, nextNode = null;
+		for (int i = 0; i <= length; ++i) {
+			if (i == offset) {
+				prevNode = currNode.prev;
+				nextNode = currNode;
+				break;
+			}
+			currNode = currNode.next;
+		}
+		currNode = prevNode;
+		for (int i = 0; i < str.length(); ++i) {
+			CNode newNode = new CNode(str.charAt(i), null, currNode);
+			if (offset == 0 && i == 0)
+				firstC = newNode;
+			currNode.next = newNode;
+			currNode = newNode;
+		}
+		currNode.next = nextNode;
+		nextNode.prev = currNode;
+		length += str.length();
+		return this;
 	}
 
 	// Insert character c into the current MyStringBuilder at index
@@ -312,10 +390,30 @@ public class MyStringBuilder {
 	// length, this is the same as append. If "offset" is invalid,
 	// do nothing.
 	public MyStringBuilder insert(int offset, char c) {
+		if (offset < 0 || offset > length)
+			return this;
+		CNode currNode = firstC;
+		CNode prevNode = null, nextNode = null;
+		for (int i = 0; i <= length; ++i) {
+			if (i == offset) {
+				prevNode = currNode.prev;
+				nextNode = currNode.next;
+				break;
+			}
+			currNode = currNode.next;
+		}
+		CNode newNode = new CNode(c, nextNode, prevNode);
+		if (offset == 0)
+			firstC = newNode;
+		prevNode.next = newNode;
+		newNode.prev = newNode;
+		length++;
+		return this;
 	}
 
 	// Return the length of the current MyStringBuilder
 	public int length() {
+		return length;
 	}
 
 	// Delete the substring from "start" to "end" - 1 in the current
@@ -328,6 +426,33 @@ public class MyStringBuilder {
 	// the delete() method followed by the insert() method, since that will
 	// require an extra traversal of the linked list.
 	public MyStringBuilder replace(int start, int end, String str) {
+		end = end < length ? end : length;
+		if (start < 0 || start >= end)
+			return this;
+		if (start == 0 && end == length)
+			return new MyStringBuilder(str);
+		CNode currNode = firstC;
+		CNode prevNode = null, nextNode = null;
+		for (int i = 0; i < length; ++i) {
+			if (i == start)
+				prevNode = currNode.prev;
+			if (i == end - 1)
+				nextNode = currNode.next;
+			currNode = currNode.next;
+		}
+		length -= end - start;
+		currNode = prevNode;
+		for (int i = 0; i < str.length(); ++i) {
+			CNode newNode = new CNode(str.charAt(i), null, currNode);
+			if (start == 0 && i == 0)
+				firstC = newNode;
+			currNode.next = newNode;
+			currNode = newNode;
+		}
+		currNode.next = nextNode;
+		nextNode = currNode;
+		length += str.length();
+		return this;
 	}
 
 	// Return as a String the substring of characters from index "start" to
@@ -338,12 +463,32 @@ public class MyStringBuilder {
 	// 3) Return a new String using the array as an argument, or
 	// return new String(charArray);
 	public String substring(int start, int end) {
+		end = end < length ? end : length;
+		if (start < 0 || start >= end)
+			return new String();
+		char[] charArray = new char[end - start];
+		CNode currNode = firstC;
+		for (int i = 0; i < length; ++i) {
+			if (i >= start && i < end)
+				charArray[i - start] = currNode.data;
+			currNode = currNode.next;
+		}
+		return new String(charArray);
 	}
 
 	// Return as a String the reverse of the contents of the MyStringBuilder. Note
 	// that this does NOT change the MyStringBuilder in any way. See substring()
 	// above for the basic approach.
 	public String revString() {
+		char[] charArray = new char[length];
+		if (length == 0)
+			return new String(charArray);
+		CNode currNode = firstC.prev;
+		for (int i = 0; i < length; ++i) {
+			charArray[i] = currNode.data;
+			currNode = currNode.prev;
+		}
+		return new String(charArray);
 	}
 
 	// You must use this inner class exactly as specified below. Note that
