@@ -1,0 +1,15 @@
+Adding 0 to Deque
+Adding 2 to Deque
+Adding 4 to Deque
+Adding 6 to Deque
+Adding 8 to Deque
+Outer value: 0
+	Inner values: 0 2 4 6 8 
+Outer value: 2
+	Inner values: 0 2 4 6 8 
+Outer value: 4
+	Inner values: 0 2 4 6 8 
+Outer value: 6
+	Inner values: 0 2 4 6 8 
+Outer value: 8
+	Inner values: 0 2 4 6 8 
