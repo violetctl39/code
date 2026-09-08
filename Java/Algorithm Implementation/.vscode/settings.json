@@ -1,0 +1,10 @@
+{
+  "java.project.referencedLibraries": [
+    "./stdlib.jar"
+  ],
+  "java.project.outputPath": "bin",
+  "code-runner.runInTerminal": true,
+  "code-runner.executorMap": {
+    "java": "cd \"$dir\" ; javac -cp \".;stdlib.jar\" \"$fileName\" ; if ($?) { java -cp \".;stdlib.jar\" \"$fileNameWithoutExt\" }"
+  }
+}
